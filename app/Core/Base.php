@@ -8,8 +8,8 @@ trait Base
         echo '<pre>';
         $data ? print_r($data):var_dump($data);
         echo '</pre>';
-        $this->view = $view;
         if($stop) exit;
+        $this->view = $view;
     }
 
 }

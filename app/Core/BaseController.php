@@ -15,8 +15,9 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->tdk['d'] = '此处是描述';
-        $this->tdk['k'] = '此处是关键字';
+        $this->tdk['t'] = 'title';
+        $this->tdk['d'] = 'desc';
+        $this->tdk['k'] = 'keyword';
         $this->data['header'] = '聊天室demo';
     }
 
@@ -42,10 +43,8 @@ class BaseController extends Controller
     }
 
     protected function default_tpl(){
-        $controller_method = explode("\\",(request()->route()->getAction())['controller']);
-        $controller_method = explode('@',end($controller_method));
-        $controller = str_replace('Controller','',$controller_method[0]);
-        $method = $controller_method[1];
-        $this->tpl = strtolower($controller.'/'.$method);
+        $controller = explode("\\",(request()->route()->getAction())['controller']);
+        list($controller,$method) = explode('@',end($controller));
+        $this->tpl = strtolower(str_replace('Controller','',$controller).'/'.$method);
     }
 }
